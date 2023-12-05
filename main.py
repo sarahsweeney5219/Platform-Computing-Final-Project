@@ -1,0 +1,61 @@
+from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.button import MDRaisedButton
+from kivy.uix.image import Image
+from kivy.clock import Clock
+from kivy.graphics.texture import Texture
+import cv2
+from util import getlimits
+from PIL import Image as img
+
+class MainApp(MDApp):
+
+    def build(self):
+        layout = MDBoxLayout(orientation='vertical')
+        self.image = Image()
+        layout.add_widget(self.image)
+        layout.add_widget(MDRaisedButton(
+            text="Yellow Detection App",
+            pos_hint={'center_x':.5, 'center_y':.5},
+            size_hint=(None,None)
+        ))
+        self.capture = cv2.VideoCapture(0)
+        Clock.schedule_interval(self.load_video, 1/60)
+        return layout
+    
+    def load_video(self, *args):
+        ret, frame = self.capture.read()
+        #Frame initialize
+        self.image_frame = frame
+
+        #color detection
+        blurred = cv2.GaussianBlur(frame, (11,11),0)
+        hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+
+        colorLower = (29,86,6)
+        colorUpper = (64, 255, 255)
+
+        mask = cv2.inRange(hsv,colorLower,colorUpper)
+        mask = cv2.erode(mask, None, iterations=3)
+        mask = cv2.dilate(mask, None, iterations=3)
+
+        mask_ = img.fromarray(mask)
+        bbox = mask_.getbbox()
+
+        if bbox is not None:
+            x1,y1, x2, y2 = bbox
+            frame = cv2.rectangle(frame, (x1,y1), (x2, y2), (0,255,0), 5)
+
+        buffer = cv2.flip(frame,0).tostring()
+        texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
+        texture.blit_buffer(buffer, colorfmt='bgr', bufferfmt='ubyte')
+        self.image.texture = texture
+        
+       
+if __name__ == '__main__':
+    MainApp().run()
+
+
+
+
+    
