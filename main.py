@@ -5,17 +5,27 @@ from kivy.uix.image import Image
 from kivy.clock import Clock
 from kivy.graphics.texture import Texture
 import cv2
-from util import getlimits
+#from utils import getlimits
 from PIL import Image as img
+from kivy.uix.button import Button 
+from kivy.uix.gridlayout import GridLayout
+from kivy.app import App 
+from kivy.uix.label import Label
+   
 
 class MainApp(MDApp):
 
     def build(self):
         layout = MDBoxLayout(orientation='vertical')
+        layout.add_widget(Button(
+            text="Color Detection",
+            pos_hint={'center_x':.5, 'center_y':.5},
+            size_hint=(.2,.2)
+        ))
         self.image = Image()
         layout.add_widget(self.image)
         layout.add_widget(MDRaisedButton(
-            text="Yellow Detection App",
+            text="Yellow Detection Apps",
             pos_hint={'center_x':.5, 'center_y':.5},
             size_hint=(None,None)
         ))
@@ -54,6 +64,8 @@ class MainApp(MDApp):
        
 if __name__ == '__main__':
     MainApp().run()
+
+
 
 
 
