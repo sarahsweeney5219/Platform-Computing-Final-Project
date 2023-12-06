@@ -1,3 +1,14 @@
+WidgetsExample:
+
+
+<WidgetsExample>: 
+    cols : 3
+    Button:
+        text: "Click Here" 
+        on_press: root.on_button_click()
+    Label:
+        text:root.my_text
+
 <BoxLayoutExample> :
     orientation: "vertical"
     Button:
@@ -5,3 +16,7 @@
         size: "40dp", "40dp"
         size_hint: None, None
         pos_hint: {"center_x": .5}
+    Button:
+        text: "B"
+    Label:
+        text: "C"

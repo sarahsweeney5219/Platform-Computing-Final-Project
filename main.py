@@ -11,7 +11,17 @@ from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.app import App 
 from kivy.uix.label import Label
-   
+from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import StringProperty
+
+class BoxLayoutExample(BoxLayout):
+     pass
+
+class WidgetsExample(GridLayout): 
+     my_text = StringProperty("Hello!")   
+     def on_button_click(self):
+          print("button clicked")
+          self.my_text = "You clicked"
 
 class MainApp(MDApp):
 
