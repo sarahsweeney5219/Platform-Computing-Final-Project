@@ -21,15 +21,13 @@ class WindowManager(ScreenManager):
     pass
 
 
-#kv = Builder.load_file("HomePage.kv")
+kv = Builder.load_file("HomePage.kv")
 
 
-class LoginPage(Screen):
+class LoginPage(App):
     kv = Builder.load_file("Homepage.kv")
-    #def build(self):
-    #    return kv
-    def __init__(self, **kwargs):  # defining an init method
-        super().__init__(**kwargs)
+    def build(self):
+        return kv
     
-#if __name__ == "__main__":
-#    LoginPage().run()
+if __name__ == "__main__":
+    LoginPage().run()
