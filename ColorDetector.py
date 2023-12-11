@@ -43,8 +43,8 @@ class ColorApp(MDApp):
             self.colorUpper = (64, 255, 255)
 
         def change_color_to_green(instance):
-            self.colorLower = (50, 100, 100)
-            self.colorUpper = (70, 255, 255)
+            self.colorLower = (70, 50, 50)
+            self.colorUpper = (100, 255, 255)
 
         layout = MDBoxLayout(orientation='vertical')
         red = Button(
@@ -76,7 +76,7 @@ class ColorApp(MDApp):
         self.image = Image()
         layout.add_widget(self.image)
         layout.add_widget(MDRaisedButton(
-            text="Yellow Detection Apps",
+            text="Color Detection App",
             pos_hint={'center_x':.5, 'center_y':.5},
             size_hint=(None,None)
         ))
