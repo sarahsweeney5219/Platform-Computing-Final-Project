@@ -1,0 +1,65 @@
+WindowManager:
+    MainWindow:
+    SecondWindow:
+
+<MainWindow>:
+    name: "main"
+    GridLayout:
+        rows: 4
+       
+        Image:
+            source: "black.jpeg" 
+            size_hint: 1, .1
+            allow_stretch: True
+            keep_ratio: False
+           
+
+        Image:
+            source: "Logo.png"
+            
+            
+
+        Label:
+            text: "This app is designed to redefine the driving experience for color blind individuals. With our app, we've harnessed the power of cutting-edge color detection technology to ensure a safer journey on the road."
+            font_size: '14sp'
+            color: 0, 0, 0, 1
+            markup: True
+            size_hint: .5, .5
+            text_size: self.width, None
+            height: self.texture_size[1]
+            pos_hint: {"center_x": 0.5, "y": .5} 
+            halign: 'center'
+            valign: 'middle'
+            
+            
+        
+        Button:
+            text: "Click Here to Begin Color Detection"
+            size_hint: .5, .4
+            background_color: 0.2, 0.2, 0.2, 1
+            pos_hint: {"center_x": 0.5, "y": .5} 
+            on_release:
+                app.root.current = "second"
+                root.manager.transition.direction = "left"
+                
+
+
+
+<SecondWindow>:
+    name: "second"
+
+    GridLayout:
+        cols: 1
+        size_hint: 0.6, 0.7
+        pos_hint: {"center_x": 0.5, "center_y": 0.60}
+            
+
+        Label:
+            text: "Color Detection."
+            color: 0, 0, 0, 1
+
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
